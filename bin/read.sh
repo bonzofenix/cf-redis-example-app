@@ -2,8 +2,8 @@
 
 set -euo pipefail
 
-function write(){
-  local app_name="redis-example-app"
+function read_key(){
+  local app_name="$1"
   local app_guid="$(cf app $app_name --guid)"
   local app="$(cf curl /v2/apps/$app_guid/stats |  jq -r '.[] | .stats.uris[0]' )"
 
@@ -11,4 +11,4 @@ function write(){
   echo
 }
 
-write
+read_key $1

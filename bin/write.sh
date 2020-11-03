@@ -3,7 +3,7 @@
 set -euo pipefail
 
 function write(){
-  app_name="redis-example-app"
+  app_name="$1"
   app_guid="$(cf app $app_name --guid)"
   app="$(cf curl /v2/apps/$app_guid/stats |  jq -r '.[] | .stats.uris[0]' )"
 
@@ -11,4 +11,4 @@ function write(){
   echo
 }
 
-write
+write $1
